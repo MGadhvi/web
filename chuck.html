@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuck Norris Joke Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        #joke {
+            margin: 20px;
+            font-size: 1.5em;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        #joke:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Chuck Norris Joke Generator</h1>
+    <div id="joke">Loading a joke...</div>
+
+    <script>
+        function fetchJoke() {
+            fetch('https://api.chucknorris.io/jokes/random')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('joke').innerText = data.value;
+                })
+                .catch(error => {
+                    console.error('Error fetching joke:', error);
+                    document.getElementById('joke').innerText = 'Oops! Something went wrong.';
+                });
+        }
+
+        // Fetch a joke when the page loads
+        window.onload = fetchJoke;
+    </script>
+</body>
+</html>
