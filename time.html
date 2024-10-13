@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clocks</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .clock {
+            font-size: 2em;
+            margin: 20px 0;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>World Clocks</h1>
+    <div class="clock" id="new-york">New York: <span id="time-new-york"></span></div>
+    <div class="clock" id="london">London: <span id="time-london"></span></div>
+    <div class="clock" id="tokyo">Tokyo: <span id="time-tokyo"></span></div>
+    <div class="clock" id="sydney">Sydney: <span id="time-sydney"></span></div>
+    <div class="clock" id="paris">Paris: <span id="time-paris"></span></div>
+
+    <script>
+        function updateClocks() {
+            const options = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('time-new-york').textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'Europe/London';
+            document.getElementById('time-london').textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'Asia/Tokyo';
+            document.getElementById('time-tokyo').textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'Australia/Sydney';
+            document.getElementById('time-sydney').textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'Europe/Paris';
+            document.getElementById('time-paris').textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Initial call to display the time immediately
+    </script>
+</body>
+</html>
